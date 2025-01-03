@@ -118,13 +118,14 @@ class Game:
             self.ufo_image = ufo_image
             self.font = font
             self.color = color
-            self.balloonX = randrange(60, self.WIDTH-60, 50)
-            self.balloonY = randrange(number * self.HEIGHT / 5, self.HEIGHT * 2 / 5, 50)
-            self.balloonR  = randint(30, 40)
+            self.balloonX = randrange(60, self.WIDTH - 60, 50)
+            self.balloonY = randrange(int(number * self.HEIGHT / 5), int(self.HEIGHT * 2 / 5), 50)
+            self.balloonR = randint(30, 40)
             self.balloonSPEED = speed
             self.balloonVisible = True
             self.value = randint(0, 25)
             self.letter = chr(self.value + 65)
+
 
         def draw(self):
             if self.balloonVisible:

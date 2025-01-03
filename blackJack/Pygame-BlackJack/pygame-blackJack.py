@@ -148,7 +148,7 @@ class Play:
              #Calculates the percentage by subtracting the x value by 150 (since the line starts at 150) and dividing it by 300 (the line is 150 px long and starts at 150 px)\
              #The percentage is then multiplied by the total money.
              #This will be changed to betting with chips
-             playerBetText = textfont.render("Bet Value: $" + str(playerBet), 1, white)
+             playerBetText = textfont.render("Bet Value: $" + str(playerBet), 1, white) if percentage < 100 else  textfont.render("Bet Value: All In", 1, white)
              screen.blit(betPercentage, (betX-10, 275))
              screen.blit(playerBetText, (150, 200))
              enterStatement = blackjack.render("Press enter to lock in bet", 0, white)

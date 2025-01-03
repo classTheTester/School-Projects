@@ -1,7 +1,11 @@
 import pygame
 import json
+from time import sleep
 pygame.init()
+import os
 from gameClasses import *
+script_directory = os.path.dirname(os.path.abspath(__file__))
+
 class Game:
     def __init__(self):
         self.white = (255, 255, 255)
@@ -16,7 +20,7 @@ class Game:
         self.font2 = pygame.font.Font('freesansbold.ttf', 45)
         self.X = 800
         self.Y = 600
-        self.keyboardImg = pygame.image.load("keyboard.png")
+        self.keyboardImg = pygame.image.load(os.path.join(script_directory, 'keyboard.png'))
         self.display_surface = pygame.display.set_mode((self.X, self.Y))
         pygame.display.set_caption('Show Text')
         self.words = ['yes', 'no', 'random', 'words', 'jkjkj', 'please', 'damn']
@@ -44,7 +48,7 @@ class Game:
                 ySpace += 50
                 xSpace = 0
 
-    def scoreDraw(self, username):
+    def scoreDraw(self, nigga):
         self.display_surface.fill(self.white)
         text = self.font.render("Please enter a username (max 15 letters)", True, self.black)
         text2 = self.font.render(
@@ -58,6 +62,7 @@ class Game:
             if self.nameSaved:
                 text = self.font.render("Username is saved!", True, self.blue)
                 self.display_surface.blit(text, (50, 230))
+
 
     def redraw(self):
         yVal = 20
@@ -74,7 +79,7 @@ class Game:
     def scoreScreen(self):
         keyList = []
         topList = []
-        readInfo = open("scores.txt", "r")
+        readInfo = open(os.path.join(script_directory, "scores.txt"), "r")
         readDict = json.load(readInfo)
         for i in readDict:
             keyList.append(int(i))
@@ -143,11 +148,11 @@ class Game:
                         if keys[pygame.K_SPACE]:
                             if len(self.userList) > 0:
                                 self.nameSaved = True
-                                readInfo = open("scores.txt", "r")
+                                readInfo = open(os.path.join(script_directory, "scores.txt"), "r")
                                 readDict = json.load(readInfo)
                                 readDict[str(self.score)] = ''.join(self.userList)
                                 readInfo.close()
-                                writingInfo = open("scores.txt", "w")
+                                writingInfo = open(os.path.join(script_directory, "scores.txt"), "w")
                                 dumpingInfo = json.dumps(readDict)
                                 writingInfo.write(dumpingInfo)
                                 writingInfo.close()
